@@ -43,9 +43,13 @@ resource "aws_s3_bucket_policy" "billing" {
         "AWS": "arn:aws:iam::551198746745:user/billing-bucket"
       },
       "Action": [
-        "s3:GetObject"
+        "s3:Get*",
+        "s3:List*"
       ],
-      "Resource": "arn:aws:s3:::reireias-billing/*"
+      "Resource": [
+        "arn:aws:s3:::reireias-billing",
+        "arn:aws:s3:::reireias-billing/*"
+      ]
     }
   ]
 }
