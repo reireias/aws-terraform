@@ -3,7 +3,7 @@ resource "aws_s3_bucket" "billing" {
   acl    = "private"
 
   tags = {
-    Name        = "reireias-billing"
+    Name = "reireias-billing"
   }
 }
 
