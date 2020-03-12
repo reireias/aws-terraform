@@ -1,0 +1,20 @@
+name: Terraform
+
+on: [push]
+
+jobs:
+  fmt:
+    name: fmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: 'Terraform Format'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.12.6
+          tf_actions_subcommand: 'fmt'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: 'true'
+          args: '-recursive'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
