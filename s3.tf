@@ -2,6 +2,8 @@ resource "aws_s3_bucket" "factorio" {
   bucket = "factorio.timelapse"
   acl    = "public-read"
 
+  force_destroy = true
+
   website {
     index_document = "index.html"
   }
