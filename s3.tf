@@ -1,3 +1,4 @@
+# tfsec:ignore:AWS002 tfsec:ignore:AWS077
 resource "aws_s3_bucket" "billing" {
   bucket = "reireias-aws-billing"
   acl    = "private"

@@ -2,17 +2,26 @@ name: tfsec
 
 on: [push]
 
+env:
+  TFSEC_VERSION: 0.39.26
+
 jobs:
   tfsec:
     name: tfsec
+
     runs-on: ubuntu-latest
+
+    timeout-minutes: 5
+
     steps:
-      - uses: actions/checkout@v2
-      # NOTE: ignore setting
-      #       AWS002: s3 logging
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: install tfsec
+        run: |
+          curl -L https://github.com/tfsec/tfsec/releases/download/v${TFSEC_VERSION}/tfsec-linux-amd64 > /tmp/tfsec
+          chmod +x /tmp/tfsec
+          sudo mv /tmp/tfsec /usr/local/bin
+
       - name: Terraform security scan
-        uses: triat/terraform-security-scan@v2.0.2
-        with:
-          tfsec_exclude: AWS002
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: tfsec
